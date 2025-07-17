@@ -22,8 +22,12 @@ class CategoryPage {
 
 
     @Composable
-    fun FetchCategory(icon: Int, heading: String?, subHeading: String?) {
-        CategoryCard(R.drawable.ic_user, "Programming", "Learn Diff language")
+    fun FetchCategory(
+        icon: Int = R.drawable.ic_user,
+        heading: String = "Programming",
+        subHeading: String = "Learn Diff language"
+    ) {
+        CategoryCard(icon, heading, subHeading)
     }
 
 
@@ -36,8 +40,7 @@ class CategoryPage {
                 .fillMaxWidth()
         ) {
             Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(8.dp)
+                verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(8.dp)
             ) {
                 Image(
                     painter = painterResource(icon),

@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+    alias(libs.plugins.ksp.kotlin)
+    alias(libs.plugins.android.dagger.hilt)
 }
 
 android {
@@ -10,7 +13,7 @@ android {
     defaultConfig {
         applicationId = "com.alpha.mywidgets"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -59,6 +62,27 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    implementation(libs.androidx.splash.screen)
+
+    implementation(libs.androidx.navigation)
+
+    implementation(libs.androidx.viewmodel)
+    implementation(libs.androidx.viewmodel.compose)
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson.converter)
+    implementation(libs.retrofit.interceptor)
+    implementation(libs.retrofit.okhttp)
+
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.dagger.hilt)
+
+    ksp(libs.dagger.hilt.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

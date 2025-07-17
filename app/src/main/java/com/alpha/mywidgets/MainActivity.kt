@@ -1,39 +1,53 @@
 package com.alpha.mywidgets
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.alpha.mywidgets.screens.CategoryPage
+import com.alpha.mywidgets.screens.HomeScreen
+import com.alpha.mywidgets.screens.LoginScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-//        enableEdgeToEdge()
+        enableEdgeToEdge()
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContent {
-//            Category()
+            App()
         }
     }
 }
 
-@Preview(showSystemUi = true)
 @Composable
-fun LoginName() {
-    val state = remember { mutableStateOf("") }
-    TextField(value = state.value, onValueChange = {
-        state.value = it
-    }, label = {
-        Text(text = "Enter name")
-    })
+fun App() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "onboarding") {
+        composable("onboarding") {
+            OnboardingScreen().OnboardingPage(navController)
+        }
+        composable("login") {
+            LoginScreen().LoginName(navController)
+        }
+        composable("home") {
+            HomeScreen()
+        }
+//        composable("home/{email}", arguments = listOf(navArgument("email") {
+//            type = NavType.StringType
+//        })) {
+//            HomeScreen().HomeScreen(navController)
+//        }
+        composable("category") {
+            CategoryPage().FetchCategory()
+        }
+    }
 }
 
-@Composable
-fun ListItem() {
-
-}
 
