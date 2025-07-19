@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
-
-    alias(libs.plugins.ksp.kotlin)
-    alias(libs.plugins.android.dagger.hilt)
+    alias(libs.plugins.jetbrains.kotlin.android) // <- this handles `kotlin("android")`
+//    kotlin("parcelize")                           // <- this adds Parcelize support
+    id("kotlin-kapt")                             // <- annotation processing
+    alias(libs.plugins.android.dagger.hilt)       // <- Hilt
 }
 
 android {
@@ -53,6 +53,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
+    implementation(project(":data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -70,18 +72,22 @@ dependencies {
     implementation(libs.androidx.viewmodel)
     implementation(libs.androidx.viewmodel.compose)
 
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.gson.converter)
-    implementation(libs.retrofit.interceptor)
-    implementation(libs.retrofit.okhttp)
+//    implementation(libs.retrofit)
+//    implementation(libs.retrofit.gson.converter)
+//    implementation(libs.retrofit.interceptor)
+//    implementation(libs.retrofit.okhttp)
 
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
 
     implementation(libs.hilt.navigation.compose)
     implementation(libs.dagger.hilt)
+//
+    kapt(libs.dagger.hilt.compiler)
 
-    ksp(libs.dagger.hilt.compiler)
+    // glide
+//    implementation ("com.github.bumptech.glide:glide:4.11.0")
+//    kapt ("com.github.bumptech.glide:compiler:4.11.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

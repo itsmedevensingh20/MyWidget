@@ -22,52 +22,48 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
-class OnboardingScreen {
 
-
-
-    @Composable
-    fun OnboardingPage(navController: NavHostController) {
-        Surface(
-            modifier = Modifier.fillMaxSize()
+@Composable
+fun OnboardingScreen(navController: NavHostController) {
+    Surface(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth()
         ) {
+            Image(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .size(200.dp)
+                    .weight(0.4f),
+                painter = painterResource(id = R.drawable.ic_office_material),
+                contentDescription = "Onboarding BG"
+            )
+            Spacer(modifier = Modifier.size(20.dp))
+
             Column(
-                modifier = Modifier.fillMaxWidth()
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(0.6f)
             ) {
-                Image(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .size(200.dp)
-                        .weight(0.4f),
-                    painter = painterResource(id = R.drawable.ic_office_material),
-                    contentDescription = "Onboarding BG"
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    maxLines = 2,
+                    textAlign = TextAlign.Center,
+                    fontSize = 20.sp,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.titleMedium,
+                    text = "Welcome to My catalog",
                 )
+
                 Spacer(modifier = Modifier.size(20.dp))
 
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Top,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(0.6f)
+                Button(
+                    onClick = { navController.navigate("login") },
                 ) {
-                    Text(
-                        modifier = Modifier.fillMaxWidth(),
-                        maxLines = 2,
-                        textAlign = TextAlign.Center,
-                        fontSize = 20.sp,
-                        overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.titleMedium,
-                        text = "Welcome to My catalog",
-                    )
-
-                    Spacer(modifier = Modifier.size(20.dp))
-
-                    Button(
-                        onClick = { navController.navigate("login") },
-                    ) {
-                        Text(text = "Get Started")
-                    }
+                    Text(text = "Get Started")
                 }
             }
         }

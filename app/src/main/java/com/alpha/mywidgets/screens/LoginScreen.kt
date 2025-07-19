@@ -21,50 +21,46 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
-class LoginScreen {
+@Composable
+fun LoginScreen(navController: NavHostController) {
+    val state = remember { mutableStateOf("") }
 
-    @Composable
-    fun LoginName(navController: NavHostController) {
-        val state = remember { mutableStateOf("") }
+    Surface() {
+        Column {
+            TextField(value = state.value, onValueChange = {
+                state.value = it
+            }, label = {
+                Text(text = "Enter name")
+            })
 
-        Surface() {
-            Column {
-                TextField(value = state.value, onValueChange = {
-                    state.value = it
-                }, label = {
-                    Text(text = "Enter name")
-                })
+            Spacer(modifier = Modifier.size(20.dp))
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(0.6f)
+            ) {
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    maxLines = 2,
+                    textAlign = TextAlign.Center,
+                    fontSize = 20.sp,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.titleMedium,
+                    text = "Welcome to My catalog",
+                )
 
                 Spacer(modifier = Modifier.size(20.dp))
 
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Top,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(0.6f)
+                Button(
+                    onClick = { navController.navigate("category") },
                 ) {
-                    Text(
-                        modifier = Modifier.fillMaxWidth(),
-                        maxLines = 2,
-                        textAlign = TextAlign.Center,
-                        fontSize = 20.sp,
-                        overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.titleMedium,
-                        text = "Welcome to My catalog",
-                    )
-
-                    Spacer(modifier = Modifier.size(20.dp))
-
-                    Button(
-                        onClick = { navController.navigate("home") },
-                    ) {
-                        Text(text = "Get Started")
-                    }
+                    Text(text = "Get Started")
                 }
-
             }
-        }
 
+        }
     }
 }

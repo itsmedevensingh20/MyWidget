@@ -6,18 +6,17 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import com.alpha.mywidgets.screens.CategoryPage
+import com.alpha.mywidgets.screens.category.CategoryScreen
 import com.alpha.mywidgets.screens.HomeScreen
 import com.alpha.mywidgets.screens.LoginScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContent {
@@ -31,10 +30,10 @@ fun App() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "onboarding") {
         composable("onboarding") {
-            OnboardingScreen().OnboardingPage(navController)
+            OnboardingScreen(navController)
         }
         composable("login") {
-            LoginScreen().LoginName(navController)
+            LoginScreen(navController)
         }
         composable("home") {
             HomeScreen()
@@ -45,7 +44,7 @@ fun App() {
 //            HomeScreen().HomeScreen(navController)
 //        }
         composable("category") {
-            CategoryPage().FetchCategory()
+            CategoryScreen()
         }
     }
 }
